@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Personal Expenses Management System</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+	<br>
+	<br>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" href="#">Personal Expenses Management
+			System</a>
+
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Navbar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/index}">Home</a></li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/categories}">Categories</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/index}">Reports</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<script th:inline="javascript">
+		function myFunction() {
+			const creationDate = moment(category.creationDate).format(
+					'MMM D, YYYY');
+		}
+	</script>
+	<div class="container">
+		<div class="row">
+			<h3>List Categories</h3>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<a th:href="@{/categories/new}" class="btn btn-primary btn-sm mb-3">Add
+					Category</a>
+			</div>
+		</div>
+		<table class=" table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th>Category Name</th>
+					<th>Description</th>
+					<!-- 	<th>Total Expenses</th>
+					<th>Date</th> -->
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr th:each="category:${categories}">
+					<td th:text="${category.categoryName}"></td>
+					<td th:text="${category.description}"></td>
+					<!--  	<td th:text="${category.totalExpense}"></td>
+					<td th:text="${category.creationDate}"></td> -->
+					<td><a th:href="@{/categories/edit/{id}(id=${category.id})}"
+						class="btn btn-primary">Update</a> <a
+						th:href="@{/categories/{id}(id=${category.id})}"
+						class="btn btn-danger">Delete</a></td>
+				</tr>
+
+			</tbody>
+
+		</table>
+
+	</div>
+</body>
+</html>
